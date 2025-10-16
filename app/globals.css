@@ -1,26 +1,56 @@
+/* Tailwind v4: import the framework */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Optional: tell Tailwind where to scan (usually not needed, but handy in monorepos) */
+/* @import "tailwindcss" source("../"); */
+
+/* Define your design tokens with @theme so you can use utilities like bg-bg, shadow-glass, etc. */
+@theme {
+  --color-bg: #0b0f17;
+  --color-bg-soft: #0e1420;
+  --color-glass: rgb(255 255 255 / 0.08);
+
+  /* Custom shadow token → use with `shadow-glass` */
+  --shadow-glass: 0 10px 30px rgb(0 0 0 / 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom utilities for animations (so you can use `animate-float` / `animate-shimmer`) */
+@utility animate-float { animation: float 6s ease-in-out infinite; }
+@utility animate-shimmer { animation: shimmer 1.8s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes shimmer {
+  0% { background-position: -700px 0; }
+  100% { background-position: 700px 0; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Base document styles */
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+body { @apply bg-bg text-white antialiased; }
+
+/* Glass card helper (used by the project tiles) */
+.glass {
+  @apply bg-glass border border-white/10 backdrop-blur-xl shadow-glass rounded-3xl;
+}
+
+/* Horizontal scrollbar for the project reel */
+.reel::-webkit-scrollbar { height: 10px; }
+.reel::-webkit-scrollbar-track { background: transparent; }
+.reel::-webkit-scrollbar-thumb { background: rgb(255 255 255 / 0.15); border-radius: 9999px; }
+
+/* Shimmer placeholder */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.06) 25%,
+    rgb(255 255 255 / 0.12) 37%,
+    rgb(255 255 255 / 0.06) 63%
+  );
+  background-size: 400% 100%;
+  @apply animate-shimmer;
 }

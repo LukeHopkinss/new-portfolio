@@ -5,7 +5,7 @@ export default function ContactPage() {
       <div className="mx-auto max-w-3xl px-4 pb-24 pt-32 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-semibold">Contact</h1>
         <p className="mt-3 text-white/80">
-          We’ll draft this page fully later. For now, add your preferred channels here.
+          We'll draft this page fully later. For now, add your preferred channels here.
         </p>
         <ul className="mt-8 space-y-3 text-white/80">
           <li>email: you@example.com</li>

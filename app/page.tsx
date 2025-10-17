@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import LiquidEther from "../components/Background/LiquidEther";
 import Navbar from "../components/Navbar";
-import ProjectCard from "../components/ProjectCard";
 import { projects } from "../lib/projects";
+import SingleCardCarousel from "../components/SingleCardCarousel";
 
 export default function Page() {
   return (
@@ -12,7 +12,7 @@ export default function Page() {
       {/* Full-screen Liquid Ether background */}
       <div className="fixed inset-0 -z-10">
         <LiquidEther
-          colors={['#efedf5', '#efedf5', '#0a0a0a']}
+          colors={["#efedf5", "#efedf5", "#0a0a0a"]}
           mouseForce={20}
           cursorSize={100}
           isViscous={false}
@@ -27,8 +27,7 @@ export default function Page() {
           takeoverDuration={0.25}
           autoResumeDelay={3000}
           autoRampDuration={0.6}
-          // Make sure the container has height (full screen)
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: "100%", height: "100%" }}
           className="pointer-events-none"
         />
       </div>
@@ -54,23 +53,18 @@ export default function Page() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          I’m <span className="font-semibold">Luke Hopkins</span>, a software engineer focused on
+          I'm <span className="font-semibold">Luke Hopkins</span>, a software engineer focused on
           computer security, full-stack apps, and data-driven design. I ship projects that bridge
           research and real-world impact.
         </motion.p>
       </section>
 
-      {/* Floating glass carousel */}
+      {/* Projects: Single-card carousel with arrows (no scrollbar) */}
       <section className="relative -mt-10 pb-24">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent to-black/60" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-sm uppercase tracking-widest text-white/60">Projects</h2>
-          <div className="reel relative flex snap-x snap-mandatory gap-6 overflow-x-auto rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.35)] [scrollbar-width:thin]">
-            {projects.map((p, i) => (
-              <ProjectCard key={p.id} p={p} className={i % 2 ? "mt-6" : "-mt-2"} />
-            ))}
-          </div>
-          <p className="mt-3 text-xs text-white/60">Scroll sideways ↔</p>
+          <h2 className="mb-6 text-sm uppercase tracking-widest text-white/60">Projects</h2>
+          <SingleCardCarousel projects={projects} />
         </div>
       </section>
 
@@ -80,3 +74,4 @@ export default function Page() {
     </main>
   );
 }
+

@@ -1,36 +1,29 @@
-import type { Project } from "../types/project";
+import { Project } from "../types/project";
 
 export const projects: Project[] = [
   {
-    id: "tracker",
-    title: "Multi-Object Tracker",
-    description:
-      "OpenCV + DeepSORT/YOLO with Flask UI and re-detection via template matching.",
-    image: "/images/tracker.jpg",
-    href: "https://github.com/yourname/multi-object-tracker",
+    id: "site-1",
+    title: "Awesome SaaS",
+    description: "Billing, auth, and dashboards for creators.",
+    href: "https://example-saas.live",
+    preview: { type: "iframe", src: "https://example-saas.live" }
   },
   {
-    id: "vista",
-    title: "Vista Kids Dental",
-    description:
-      "Next.js + Tailwind site; forms, SEO, and ongoing improvements.",
-    image: "/images/vista.jpg",
-    href: "https://vistakidsdental.example.com",
+    id: "site-2",
+    title: "Docs Platform",
+    description: "MDX-powered docs with search.",
+    href: "https://docs.example.com",
+    preview: { type: "iframe", src: "https://docs.example.com" }
   },
   {
-    id: "mycelium",
-    title: "Mycelium Lab",
-    description:
-      "Automation for indoor greenhouse; sensors + data viz, sustainable biomaterials.",
-    image: "/images/mycelium.jpg",
-    href: "https://github.com/yourname/mycelium-lab",
-  },
-  {
-    id: "disco",
-    title: "Disco Veggies",
-    description:
-      "AI-controlled LED spectra to optimize growth of tulip & poppy hydroponics.",
-    image: "/images/disco.jpg",
-    href: "https://github.com/yourname/disco-veggies",
-  },
+    id: "repo-1",
+    title: "Open Source CLI",
+    description: "A tiny CLI to scaffold apps quickly.",
+    href: "https://github.com/your/repo",
+    preview: {
+      type: "image",
+      src: "/projects/cli-thumb.jpg",
+      alt: "CLI screenshot"
+    }
+  }
 ];

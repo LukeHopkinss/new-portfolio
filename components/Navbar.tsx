@@ -4,13 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 type NavbarProps = {
-  /** e.g. "/logo.jpg" (put the file in /public) or a remote URL (configure next.config) */
   logoSrc?: string;
   logoAlt?: string;
-  /** pixel dimensions for the rendered logo */
   logoWidth?: number;
   logoHeight?: number;
-  /** round the logo a bit by default */
   logoClassName?: string;
 };
 

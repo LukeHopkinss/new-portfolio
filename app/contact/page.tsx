@@ -3,11 +3,11 @@
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import LiquidEther from "../../components/Background/LiquidEther";
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      {/* Liquid Ether background */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <LiquidEther
           colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
@@ -43,13 +43,18 @@ export default function ContactPage() {
 
         {/* content grid */}
         <div className="mt-10 grid gap-8 md:grid-cols-2">
-          {/* Photo placeholder */}
+          {/* Photo */}
           <div className="flex items-center justify-center">
-            <div className="aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-              {/* Replace with your photo later: <Image src="/me.jpg" ... /> */}
-              <div className="flex h-full items-center justify-center text-sm text-white/70">
-                Your photo here
-              </div>
+            <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+              <Image
+                src="/contact/portfolio-pic.jpg"
+                alt="Picture of Luke Hopkins"
+                fill
+                className="object-cover"
+                priority
+                quality={100}
+                sizes="(min-width: 1024px) 26rem, (min-width: 768px) 22rem, 92vw"
+              />
             </div>
           </div>
 

@@ -43,6 +43,18 @@ export default function ProjectCard({ project }: { project: Project }) {
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
     >
+      {/* Title */}
+      <div className="mb-2 flex justify-center">
+        <h3
+          className="inline-block max-w-[90%] overflow-hidden text-ellipsis whitespace-nowrap
+                    rounded-xl bg-black/30 px-3 py-1.5 text-center text-sm font-semibold text-white
+                    backdrop-blur-sm"
+          title={project.title}
+        >
+          {project.title}
+        </h3>
+      </div>
+
       {/* Tilted media card */}
       <TiltedCard
         imageSrc={imgSrc}
@@ -55,16 +67,12 @@ export default function ProjectCard({ project }: { project: Project }) {
         rotateAmplitude={12}
         showMobileWarning={false}
         showTooltip={false}
-        displayOverlayContent
-        overlayContent={
-          <div className="pointer-events-none absolute bottom-3 left-3 right-3 rounded-xl bg-black/40 px-3 py-2 text-white backdrop-blur-sm">
-            <div className="text-sm font-semibold">{project.title}</div>
-          </div>
-        }
+        displayOverlayContent={false}
+        overlayContent={null}
       />
 
       {/* Description & CTA — always visible, not covered */}
-      <div className="mt-3 space-y-2 text-center">
+      <div className="mt-4 space-y-2 text-center">
         <p className="text-sm text-white/85">{project.description}</p>
         <div className="flex justify-center gap-2">
           <a

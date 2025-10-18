@@ -92,7 +92,7 @@ export default function SingleCardCarousel({ projects }: Props) {
       {/* stage: allow vertical overflow so title/description aren't clipped */}
       <div
         ref={containerRef}
-        className="mx-auto flex w-full items-start justify-center overflow-x-hidden overflow-y-visible px-12 py-6 min-h-[640px]"
+        className="mx-auto flex w-full items-start justify-center overflow-x-hidden overflow-y-visible px-12 py-6 min-h-[720px]"
       >
         <AnimatePresence initial={false} custom={dirRef.current} mode="popLayout">
           <motion.div

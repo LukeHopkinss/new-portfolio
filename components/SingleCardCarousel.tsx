@@ -1,24 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Project } from "../types/project";
 import ProjectCard from "./ProjectCard";
-import { AnimatePresence, motion } from "framer-motion";
 
 type Props = { projects: Project[] };
 
 export default function SingleCardCarousel({ projects }: Props) {
   const [index, setIndex] = useState(0);
-  const dirRef = useRef<1 | -1>(1); // animation direction
+  const dirRef = useRef<1 | -1>(1);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const prev = () => {
+  const prev = useCallback(() => {
     dirRef.current = -1;
     setIndex((i) => (i === 0 ? projects.length - 1 : i - 1));
-  };
-  const next = () => {
+  }, [projects.length]);
+
+  const next = useCallback(() => {
     dirRef.current = 1;
     setIndex((i) => (i === projects.length - 1 ? 0 : i + 1));
-  };
+  }, [projects.length]);
 
   // keyboard nav
   useEffect(() => {
@@ -28,52 +30,67 @@ export default function SingleCardCarousel({ projects }: Props) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [prev, next]);
 
-  // swipe
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  // swipe (mouse + touch) — fully typed, no "any"
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+
     let startX = 0;
     let dx = 0;
-    const down = (e: MouseEvent | TouchEvent) => {
-      startX = "touches" in e ? e.touches[0].clientX : e.clientX;
+
+    const onMouseDown = (e: MouseEvent) => {
+      startX = e.clientX;
       dx = 0;
-      window.addEventListener("mousemove", move);
-      window.addEventListener("mouseup", up);
-      window.addEventListener("touchmove", move as any, { passive: true });
-      window.addEventListener("touchend", up as any);
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
     };
-    const move = (e: MouseEvent | TouchEvent) => {
-      const x = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-      dx = x - startX;
+    const onMouseMove = (e: MouseEvent) => {
+      dx = e.clientX - startX;
     };
-    const up = () => {
+    const onMouseUp = () => {
       if (dx < -40) next();
-      if (dx > 40) prev();
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", up);
-      window.removeEventListener("touchmove", move as any);
-      window.removeEventListener("touchend", up as any);
+      else if (dx > 40) prev();
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
     };
-    el.addEventListener("mousedown", down);
-    el.addEventListener("touchstart", down as any, { passive: true });
+
+    const onTouchStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      startX = t ? t.clientX : 0;
+      dx = 0;
+      window.addEventListener("touchmove", onTouchMove, { passive: true });
+      window.addEventListener("touchend", onTouchEnd);
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) dx = t.clientX - startX;
+    };
+    const onTouchEnd = () => {
+      if (dx < -40) next();
+      else if (dx > 40) prev();
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+
+    el.addEventListener("mousedown", onMouseDown);
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+
     return () => {
-      el.removeEventListener("mousedown", down);
-      el.removeEventListener("touchstart", down as any);
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", up);
-      window.removeEventListener("touchmove", move as any);
-      window.removeEventListener("touchend", up as any);
+      el.removeEventListener("mousedown", onMouseDown);
+      el.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
     };
-  }, []);
+  }, [prev, next]);
 
   const current = projects[index];
 
   return (
     <div className="relative w-full select-none">
-      {/* arrows */}
       <button
         onClick={prev}
         aria-label="Previous project"
@@ -89,10 +106,9 @@ export default function SingleCardCarousel({ projects }: Props) {
         <ArrowRight />
       </button>
 
-      {/* stage: allow vertical overflow so title/description aren't clipped */}
       <div
         ref={containerRef}
-        className="mx-auto flex w-full items-start justify-center overflow-x-hidden overflow-y-visible px-12 py-6 min-h-[720px]"
+        className="mx-auto flex w-full items-start justify-center overflow-x-hidden overflow-y-visible px-12 py-6 min-h-[640px]"
       >
         <AnimatePresence initial={false} custom={dirRef.current} mode="popLayout">
           <motion.div
@@ -108,7 +124,6 @@ export default function SingleCardCarousel({ projects }: Props) {
         </AnimatePresence>
       </div>
 
-      {/* dots */}
       <div className="mt-2 flex justify-center gap-1.5">
         {projects.map((p, i) => (
           <button

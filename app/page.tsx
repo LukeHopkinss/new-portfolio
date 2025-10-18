@@ -53,8 +53,8 @@ export default function Page() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          I'm <span className="font-semibold">Luke Hopkins</span>, a software engineer focused on
-          computer security, full-stack apps, and data-driven design. I ship projects that bridge
+          I'm <span className="font-semibold">Luke Hopkins</span>, a computer science and cybersecurity student
+          focused on computer security, full-stack apps, and data-driven design. I ship projects that bridge
           research and real-world impact.
         </motion.p>
       </section>

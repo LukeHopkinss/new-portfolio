@@ -52,7 +52,7 @@ export default function ContactPage() {
                 fill
                 className="object-cover"
                 priority
-                quality={100}
+                quality={99}
                 sizes="(min-width: 1024px) 26rem, (min-width: 768px) 22rem, 92vw"
               />
             </div>

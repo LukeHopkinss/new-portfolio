@@ -20,10 +20,14 @@ export default function ProjectCard({ project }: { project: Project }) {
   const alt = project.preview.alt ?? project.title;
 
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    const el = e.target as HTMLElement;
+    if (el.closest("a,button")) return; // ignore taps on CTAs
     downRef.current = { x: e.clientX, y: e.clientY, t: Date.now() };
   }
 
   function handlePointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    const el = e.target as HTMLElement;
+    if (el.closest("a,button")) return; // ignore taps on CTAs
     const d = downRef.current;
     if (!d) return;
     const dx = Math.abs(e.clientX - d.x);
@@ -38,12 +42,8 @@ export default function ProjectCard({ project }: { project: Project }) {
   }
 
   return (
-    <div
-      className="relative mx-auto w-[360px] select-none"
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
-    >
-      {/* Title */}
+    <div className="relative mx-auto w-[360px] select-none">
+      {/* Title (one line, blurred pill) */}
       <div className="mb-2 flex justify-center">
         <h3
           className="inline-block max-w-[90%] overflow-hidden text-ellipsis whitespace-nowrap
@@ -55,23 +55,25 @@ export default function ProjectCard({ project }: { project: Project }) {
         </h3>
       </div>
 
-      {/* Tilted media card */}
-      <TiltedCard
-        imageSrc={imgSrc}
-        content={media}
-        altText={alt}
-        containerHeight="500px"
-        imageHeight="360px"
-        imageWidth="360px"
-        scaleOnHover={1.06}
-        rotateAmplitude={12}
-        showMobileWarning={false}
-        showTooltip={false}
-        displayOverlayContent={false}
-        overlayContent={null}
-      />
+      {/* Tap-to-open ONLY on the card area */}
+      <div onPointerDown={handlePointerDown} onPointerUp={handlePointerUp}>
+        <TiltedCard
+          imageSrc={imgSrc}
+          content={media}
+          altText={alt}
+          containerHeight="500px"
+          imageHeight="360px"
+          imageWidth="360px"
+          scaleOnHover={1.06}
+          rotateAmplitude={12}
+          showMobileWarning={false}
+          showTooltip={false}
+          displayOverlayContent={false}
+          overlayContent={null}
+        />
+      </div>
 
-      {/* Description & CTA — always visible, not covered */}
+      {/* Description & CTA — clicking this won't trigger the tap handler */}
       <div className="mt-4 space-y-2 text-center">
         <p className="text-sm text-white/85">{project.description}</p>
         <div className="flex justify-center gap-2">

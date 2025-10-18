@@ -53,5 +53,16 @@ export const projects: Project[] = [
     description: "React CRUD list demonstrating component state, derived computations, and Netlify-ready static deployment with an efficient build pipeline.",
     href: "https://productivitymaxxing.netlify.app/",
     preview: { type: "iframe", src: "https://productivitymaxxing.netlify.app/" }
+  },
+  {
+    id: "repo-1",
+    title: "Peeyew.Net",
+    description: "Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion: a playful, gallery-forward site featuring an MS Paint-style HTML5 canvas, created for Converse All-Stars Scholar Program.",
+    href: "https://github.com/LukeHopkinss/peeyew-net",
+    preview: {
+      type: "image",
+      src: "/projects/peeyew-net.png",
+      alt: "peeyew-net screenshot"
+    }
   }
 ];

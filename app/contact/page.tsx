@@ -87,7 +87,7 @@ export default function ContactPage() {
                   GitHub
                 </Link>
                 <Link
-                  href="/contact/Luke Hopkins - Resume 2025 PDF.pdf"
+                  href="/contact/lhresume2026"
                   target="_blank"
                   rel="noreferrer noopener"
                   className="rounded-full bg-white/10 px-4 py-2 text-sm backdrop-blur transition hover:bg-white/20"

@@ -11,7 +11,7 @@ export default function ContactPage() {
     <div className="relative min-h-screen overflow-x-hidden">
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <LiquidEther
-          colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+          colors={["#efedf5", "#efedf5", "#0a0a0a"]}
           mouseForce={20}
           cursorSize={100}
           isViscous={false}

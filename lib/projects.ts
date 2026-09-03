@@ -57,12 +57,11 @@ export const projects: Project[] = [
   {
     id: "repo-1",
     title: "Peeyew.Net",
-    description: "Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion: a playful, gallery-forward site featuring an MS Paint-style HTML5 canvas, created for Converse All-Stars Scholar Program.",
-    href: "https://github.com/LukeHopkinss/peeyew-net",
+    description: "Built with Next.js, TypeScript, Tailwind CSS. A full-stack website supporting shopping and gallery display created for Converse All-Stars Scholar Program.",
+    href: "https://peeyew.net",
     preview: {
-      type: "image",
-      src: "/projects/peeyew-net.png",
-      alt: "peeyew-net screenshot"
+      type: "iframe",
+      src: "https://peeyew.net"
     }
   }
 ];

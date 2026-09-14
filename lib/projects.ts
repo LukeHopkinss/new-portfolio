@@ -2,6 +2,14 @@ import { Project } from "../types/project";
 
 export const projects: Project[] = [
   {
+    id: "sam-ai",
+    title: "Sam AI",
+    description: "AI CFO and operations assistant for startup founders, built with Next.js, TypeScript, Supabase, and LangChain with Claude. Combines streaming conversations and inline charts with deterministic financial calculations.",
+    href: "https://usesamai.vercel.app/",
+    repoHref: "https://github.com/AnuRaghav/LockInVowe",
+    preview: { type: "iframe", src: "https://usesamai.vercel.app/" }
+  },
+  {
     id: "site-1",
     title: "ZLB Studio",
     description: "Full-stack site for creative consulting studio with a Node/Next.js API layer and a PostgreSQL datastore for contact submissions, featuring schema-validated endpoints and a typed client on the frontend.",

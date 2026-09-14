@@ -85,9 +85,18 @@ export default function ProjectCard({ project }: { project: Project }) {
           >
             Open site
           </a>
+          {project.repoHref && (
+            <a
+              href={project.repoHref}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center rounded-full bg-white/10 px-3 py-1.5 text-sm text-white hover:bg-white/20 backdrop-blur"
+            >
+              View code
+            </a>
+          )}
         </div>
       </div>
     </div>
   );
 }
-

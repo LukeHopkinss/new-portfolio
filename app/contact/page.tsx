@@ -35,7 +35,7 @@ export default function ContactPage() {
       <main className="mx-auto max-w-5xl px-4 pb-24 pt-20 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-semibold">About Me</h1>
         <p className="mt-3 max-w-2xl text-white/80">
-          I'm a junior at NYU Tandon School of Engineering, originally from San Diego, studying Computer Science and Cybersecurity.
+          I'm a senior at NYU Tandon School of Engineering, originally from San Diego, studying Computer Science and Cybersecurity.
           I care about building thoughtful full-stack applications with security baked in from day one, with clean architecture, reliable infrastructure, and defense in depth.
           Outside of code you'll find me rock climbing, working out, reading, trying new food, and exploring music; fakemink is on repeat right now.
           I'm Ethiopian and Vietnamese and love sharing and learning from both cultures.
